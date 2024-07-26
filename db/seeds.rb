@@ -12,7 +12,7 @@ airports.each do |airport_code|
   Airport.find_or_create_by!(code: airport_code)
 end
 
-def random_datetime(start_date = DateTime.now, end_date = DateTime.now + 365)
+def random_datetime(start_date = DateTime.now, end_date = DateTime.now + 14)
   time_diff = end_date.to_time - start_date.to_time
   random_time = start_date.to_time + rand * time_diff
   random_time.to_datetime

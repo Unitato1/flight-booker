@@ -1,0 +1,22 @@
+<h1>Booking</h1>
+<ul>
+  <li>Departure: <%= @flight.departure_airport.code %></li>
+  <li>Arrival: <%= @flight.arrival_airport.code %></li>
+  <li>DATE: <%= @flight.start.strftime("%d/%m/%Y") %></li>
+  <li>DURATION: <%= @flight.duration %></li>
+  <li>For <%= pluralize(@booking_params[:passangers], "passenger")%></li>
+</ul>
+<%= form_with model: @booking do |booking_form| %>
+  <%= booking_form.hidden_field :flight_id, value: @booking_params[:flight_id]%>
+  <% @passengers.each do |passenger| %>
+    <%= booking_form.fields_for :passengers, passenger do |f| %>
+      <div>
+        <%= f.label :name %>
+        <%= f.text_field :name, placeholder: "Bob"%>
+        <%= f.label :email %>
+        <%= f.text_field :email, placeholder: "bobsemail@example.com"%>
+      </div>
+    <% end %>
+  <% end %>
+  <%= booking_form.submit "Booking" %>
+<% end %>

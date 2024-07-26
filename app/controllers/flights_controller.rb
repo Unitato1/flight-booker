@@ -9,6 +9,7 @@ class FlightsController < ApplicationController
       @flights = @flights.where(departure_airport_id: @seach_params[:departure_airport_id]) unless @seach_params[:departure_airport_id] == ""
       @flights = @flights.where("Date(start) = ?", @seach_params[:start]) if @seach_params[:start].present?
       @flight_arrival_airport_id = @seach_params[:arrival_airport_id]
+      @booking = Booking.new
     end
     @flight_starts = @flights.map { |flight| [flight.start.strftime("%d/%m/%Y"), flight.start]}
   end
